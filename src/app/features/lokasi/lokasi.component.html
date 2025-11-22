@@ -1,0 +1,53 @@
+<div class="page">
+  <h1>Jemputan Perkahwinan</h1>
+  <p>Ahcmad Taufiq &amp; Wan Nur Adlina</p>
+  <p>Sabtu, 5 Oktober 2024</p>
+
+  <p class="subtitle">
+    Ini halaman utama jemputan. Nanti kita tukar jadi design cantik.
+  </p>
+
+  <!-- 🔹 Section Lokasi dalam main page -->
+  <section id="lokasi" class="lokasi-section">
+    <h2>Lokasi Majlis</h2>
+    <p>Dewan Sri Harmoni, Bandar Puteri</p>
+
+    <div class="lokasi-buttons">
+      <!-- ✅ BUTTON GOOGLE MAPS -->
+      <a
+        class="lokasi-btn"
+        href="https://www.google.com/maps"
+        target="_blank"
+        rel="noopener"
+      >
+        Buka Google Maps
+      </a>
+
+      <!-- ✅ BUTTON WAZE -->
+      <a
+        class="lokasi-btn outline"
+        href="https://waze.com/ul"
+        target="_blank"
+        rel="noopener"
+      >
+        Buka Waze
+      </a>
+    </div>
+
+    <small class="lokasi-note">
+      *Nanti Taufiq boleh tukar URL ini kepada link sebenar Google Maps &amp; Waze.*
+    </small>
+  </section>
+
+  <nav class="bottom-menu">
+    <!-- Jemputan kekal di route utama -->
+    <a routerLink="/">Jemputan</a>
+
+    <!-- 🔹 Lokasi sekarang hanya scroll ke section #lokasi -->
+    <a href="#lokasi">Lokasi</a>
+
+    <a routerLink="/guestbook">Ucapan</a>
+    <a routerLink="/rsvp">RSVP</a>
+    <a routerLink="/hubungi">Hubungi</a>
+  </nav>
+</div>

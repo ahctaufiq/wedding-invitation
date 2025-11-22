@@ -1,0 +1,278 @@
+<div class="page">
+  <div id="yt-player"></div>
+  <!-- ✨ Teks jemputan utama -->
+  <section #inviteSection class="invite-section floral-theme">
+  <div class="invite-card">
+ <div class="invite-card-inner-floral"></div>
+    <!-- Decorative floral SVG (top-left) -->
+    <div class="floral-ornament ornament-top-left" aria-hidden="true">
+      <svg viewBox="0 0 120 120" width="120" height="120" xmlns="http://www.w3.org/2000/svg">
+        <g transform="translate(60,60)">
+          <g class="petals" fill="#f4c5d6">
+            <path d="M0-6 C10-18 28-20 32-8 C36 4 18 18 6 16 C-6 14 -6 6 0 -6 Z"/>
+            <path d="M6-12 C18-24 36-26 40-14 C44 -2 26 12 14 10 C2 8 2 0 6 -12 Z" transform="rotate(45)"/>
+            <path d="M6-12 C18-24 36-26 40-14 C44 -2 26 12 14 10 C2 8 2 0 6 -12 Z" transform="rotate(90)"/>
+            <path d="M6-12 C18-24 36-26 40-14 C44 -2 26 12 14 10 C2 8 2 0 6 -12 Z" transform="rotate(135)"/>
+          </g>
+          <circle r="8" fill="#e89fb6" />
+        </g>
+      </svg>
+    </div>
+    <p class="basmalah">
+      بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ
+    </p>
+
+    <p class="invite-tagline">
+      Dengan penuh rasa syukur dan kasih sayang,
+    </p>
+
+    <p class="parents">
+      <strong>SYED ABD RAHIM BIN SYED ALI RIDZAK</strong><br />
+      &amp;<br />
+      <strong>ZUNAITA BT MOHD NOOR</strong>
+    </p>
+
+    <p class="invite-line">
+      Dengan penuh rasa hormat dan berbesar hati kami menjemput
+    </p>
+
+    <p class="vip-line">
+      Yang Berbahagia Tan Sri | Puan Sri | Dato' Sri | Datin Sri |<br />
+      Dato' | Datin | Tuan | Puan | Encik | Cik<br />
+      seisi keluarga hadir ke majlis perkahwinan anakanda kami
+    </p>
+
+    <p class="pengantin">
+      <span class="pengantin-name">
+        WAN NUR ADLINA
+      </span><br />
+      <span class="and">&amp;</span><br />
+      <span class="pengantin-name">
+        AHCMAD TAUFIQ
+      </span>
+    </p>
+        <!-- 🔥 POPUP LOKASI (Bottom Sheet) -->
+    <div class="divider-floral"></div>
+
+    <div class="info-grid">
+
+      <!-- Tempat -->
+      <div class="info-block">
+        <h3>TEMPAT</h3>
+        <p class="info-main">TIMORRA VENUE KUANTAN</p>
+        <p class="info-sub">
+          415, Jalan Tanjung Lumpur, Kampung Teluk Baharu,<br />
+          26060 Kuantan, Pahang
+        </p>
+      </div>
+
+      <!-- Tarikh -->
+      <div class="info-block">
+        <h3>TARIKH</h3>
+        <p class="info-main">{{ targetMalayLong || targetDisplay }}</p>
+        <p class="info-sub">
+          <strong>Menanti Hari:</strong> 
+          
+          <!-- {{ targetDisplay }} -->
+          <span *ngIf="daysUntil > 0"> {{ daysUntil }} hari lagi</span>
+          <span *ngIf="daysUntil === 0">• Hari ini</span>
+          <span *ngIf="daysUntil < 0">• {{ -daysUntil }} hari yang lalu</span>
+        </p>
+      </div>
+
+      <!-- Waktu -->
+      <div class="info-block">
+        <h3>WAKTU</h3>
+        <p class="info-main">11:30 pagi - 4:00 petang</p>
+      </div>
+
+      <!-- Atur Cara -->
+      <div class="info-block full">
+        <h3>ATUR CARA MAJLIS</h3>
+        <p><strong>Kehadiran Tetamu:</strong> 11:30 pagi</p>
+        <p><strong>Ketibaan Pengantin:</strong> 12:30 tengah hari</p>
+        <p><strong>Makan Beradab:</strong> 1:30 petang</p>
+        <p><strong>Majlis Berakhir:</strong> 4:00 petang</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+  <!-- ✨ Doa -->
+  <section class="doa-section">
+  <div class="doa-card">
+    <p class="doa-title">Dengan nama Allah Yang Maha Pengasih Lagi Maha Penyayang</p>
+    <p class="doa-text">
+      “Ya Allah Ya Tuhan Kami,<br />
+      Satukanlah kedua mempelai ini,<br />
+      ...
+    </p>
+  </div>
+</section>
+<!-- Overlay blur – keluar hanya bila mana-mana popup ON -->
+<div
+  class="blur-overlay"
+  *ngIf="showGate || showLocation || showContact || showRSVP">
+></div>
+
+<!-- 🟣 PINTU / GATE DI DEPAN -->
+<div class="gate-overlay" *ngIf="showGate" (click)="onGateClick()">
+
+  <!-- 🚪 Pintu kiri & kanan -->
+  <div class="door door-left" [class.open]="isDoorOpening"></div>
+  <div class="door door-right" [class.open]="isDoorOpening"></div>
+
+  <!-- Kad teks jemputan depan -->
+  <div class="gate-card" [class.fade-out]="isDoorOpening">
+    <p class="gate-small-text">Jemputan Majlis Perkahwinan</p>
+    <p class="gate-names">
+      WAN NUR ADLINA<br />
+      &amp;<br />
+      AHCMAD TAUFIQ
+    </p>
+    <h2 class="gate-title">Sila tekan untuk masuk</h2>
+    <!-- Entry is handled by clicking anywhere on the overlay; button removed as requested -->
+    <!-- Small floral accent on gate -->
+    <div class="gate-floral" aria-hidden="true">
+      <svg viewBox="0 0 100 100" width="84" height="84" xmlns="http://www.w3.org/2000/svg">
+        <g transform="translate(50,50)">
+          <g fill="#f7c8d3" opacity="0.95">
+            <ellipse rx="6" ry="18" transform="rotate(0)"/>
+            <ellipse rx="6" ry="18" transform="rotate(45)"/>
+            <ellipse rx="6" ry="18" transform="rotate(90)"/>
+            <ellipse rx="6" ry="18" transform="rotate(135)"/>
+          </g>
+          <circle r="7" fill="#e89fb6" />
+        </g>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<nav class="bottom-menu" *ngIf="!showGate">
+
+  <a (click)="openLocation()" class="menu-icon">
+    <svg class="menu-svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/>
+    </svg>
+  </a>
+
+  <a (click)="openRSVP()" class="menu-icon">
+    <svg class="menu-svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1 .9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+    </svg>
+  </a>
+
+  <a (click)="openContact()" class="menu-icon">
+    <svg class="menu-svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.11-.21 11.36 11.36 0 003.58.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1 11.36 11.36 0 00.62 3.58 1 1 0 01-.21 1.11l-2.29 2.1z"/>
+    </svg>
+  </a>
+
+  <a (click)="toggleMusic()" class="menu-icon">
+    <svg *ngIf="!isMusicPlaying" class="menu-svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M12 3v10.55A4 4 0 1014 17V7h4V3h-6z"/>
+    </svg>
+    <svg *ngIf="isMusicPlaying" class="menu-svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.74 2.5-2.26 2.5-4.02zM18 3.99v16.02c2.89-1.48 5-4.44 5-8.01s-2.11-6.53-5-8.01zM4 9v6h4l5 4V5L8 9H4z"/>
+    </svg>
+  </a>
+
+</nav>
+
+
+  <!-- 🔥 POPUP LOKASI (Bottom Sheet) -->
+  <div class="location-popup" *ngIf="showLocation">
+    <div class="location-card">
+      <h3>LOKASI</h3>
+      <p class="venue">TIMORRA VENUE KUANTAN</p>
+      <p class="addr">
+        415, Jalan Tanjung Lumpur,<br />
+        Kampung Teluk Baharu,<br />
+        26060 Kuantan, Pahang
+      </p>
+
+      <div class="location-btn-row">
+        <a class="loc-btn maps" href="https://www.google.com/maps" target="_blank">Maps</a>
+        <a class="loc-btn waze" href="https://waze.com/ul" target="_blank">Waze</a>
+      </div>
+
+      <button class="close-btn" (click)="closeLocation()">Tutup</button>
+    </div>
+  </div>
+
+  <!-- 🔥 POPUP HUBUNGI (2 Contact) -->
+  <div class="contact-popup" *ngIf="showContact">
+    <div class="contact-card">
+      <h3>HUBUNGI</h3>
+
+      <p class="contact-desc">Sila hubungi wakil kami untuk pertanyaan lanjut atau bantuan.</p>
+
+       <div class="contact-entry">
+        <a
+          class="contact-btn whatsapp alt small"
+          href="https://wa.me/60123123123"
+          target="_blank"
+          aria-label="Hubungi Hidayah melalui WhatsApp"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M20.52 3.48A11.94 11.94 0 0012 0C5.373 0 .036 5.338.036 12c0 2.115.551 4.181 1.595 6.02L0 24l6.2-1.607A11.958 11.958 0 0012 24c6.627 0 12-5.373 12-12 0-3.18-1.24-6.142-3.48-8.52z" fill="#fff" opacity="0.05"/>
+            <path d="M17.4 14.8c-.3-.15-1.77-.87-2.05-.97-.28-.1-.49-.15-.7.15-.2.3-.77.97-.94 1.17-.17.2-.34.23-.64.08-.3-.15-1.26-.46-2.4-1.48-.89-.8-1.48-1.78-1.65-2.08-.17-.3-.02-.46.13-.61.14-.14.3-.34.45-.51.15-.17.2-.28.3-.47.1-.2.05-.37-.03-.52-.08-.15-.7-1.68-.96-2.3-.25-.62-.5-.54-.7-.55-.18-.01-.38-.01-.58-.01-.2 0-.52.07-.79.37-.27.3-1.04 1.03-1.04 2.51 0 1.48 1.07 2.92 1.22 3.12.15.2 2.1 3.3 5.08 4.63 2.98 1.34 2.98.89 3.52.83.54-.06 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.08-.12-.28-.18-.58-.33z" fill="#fff"/>
+          </svg>
+          <span>Nur Sakinah</span>
+        </a>
+      </div>
+
+      <div class="contact-entry">
+        <a
+          class="contact-btn whatsapp alt small"
+          href="https://wa.me/60123123123"
+          target="_blank"
+          aria-label="Hubungi Hidayah melalui WhatsApp"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M20.52 3.48A11.94 11.94 0 0012 0C5.373 0 .036 5.338.036 12c0 2.115.551 4.181 1.595 6.02L0 24l6.2-1.607A11.958 11.958 0 0012 24c6.627 0 12-5.373 12-12 0-3.18-1.24-6.142-3.48-8.52z" fill="#fff" opacity="0.05"/>
+            <path d="M17.4 14.8c-.3-.15-1.77-.87-2.05-.97-.28-.1-.49-.15-.7.15-.2.3-.77.97-.94 1.17-.17.2-.34.23-.64.08-.3-.15-1.26-.46-2.4-1.48-.89-.8-1.48-1.78-1.65-2.08-.17-.3-.02-.46.13-.61.14-.14.3-.34.45-.51.15-.17.2-.28.3-.47.1-.2.05-.37-.03-.52-.08-.15-.7-1.68-.96-2.3-.25-.62-.5-.54-.7-.55-.18-.01-.38-.01-.58-.01-.2 0-.52.07-.79.37-.27.3-1.04 1.03-1.04 2.51 0 1.48 1.07 2.92 1.22 3.12.15.2 2.1 3.3 5.08 4.63 2.98 1.34 2.98.89 3.52.83.54-.06 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.08-.12-.28-.18-.58-.33z" fill="#fff"/>
+          </svg>
+          <span>Hidayah</span>
+        </a>
+      </div>
+
+      <button class="close-btn" (click)="closeContact()">Tutup</button>
+    </div>
+  </div>
+  
+  <!-- 🔥 POPUP RSVP -->
+  <div class="rsvp-popup" *ngIf="showRSVP">
+    <div class="rsvp-card">
+
+      <h3>RSVP</h3>
+
+      <label>Nama</label>
+      <input type="text" [(ngModel)]="rsvpName" placeholder="Masukkan nama anda" />
+
+      <label>Bilangan Tetamu</label>
+      <select [(ngModel)]="rsvpCount">
+        <option value="1">1 Orang</option>
+        <option value="2">2 Orang</option>
+        <option value="3">3 Orang</option>
+        <option value="4">4 Orang</option>
+        <option value="5">5 Orang</option>
+      </select>
+
+      <label>Kehadiran</label>
+      <div class="presence-row">
+        <button class="presence hadir" (click)="setPresence('Hadir')">Hadir</button>
+        <button class="presence takhadir" (click)="setPresence('Tidak Hadir')">Tidak Hadir</button>
+      </div>
+
+      <button class="send-btn" (click)="sendRSVP()">Hantar RSVP</button>
+      <button class="close-btn" (click)="closeRSVP()">Tutup</button>
+
+    </div>
+  </div>
+
+</div>
+  
+

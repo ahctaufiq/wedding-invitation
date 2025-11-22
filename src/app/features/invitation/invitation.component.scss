@@ -1,0 +1,855 @@
+/* ========================
+   GLOBAL & LAYOUT
+   ======================== */
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Font global */
+body {
+  font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Page background + layout */
+.page {
+  position: relative;
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #fdeaf3, #f8f2ec);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  transition: filter 0.3s ease, opacity 0.3s ease;
+  z-index: 1;
+}
+
+.page.blur-active {
+  filter: blur(4px);
+  opacity: 0.85;
+}
+
+/* ========================
+   BOTTOM NAV
+   ======================== */
+
+.bottom-menu {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 10px 8px;
+  display: flex;
+  justify-content: space-around;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 -8px 20px rgba(0, 0, 0, 0.16);
+  border-top: 1px solid #ddd;
+  z-index: 99999;
+}
+
+.bottom-menu a {
+  flex: 1;
+  text-align: center;
+  font-size: 12px;
+  text-decoration: none;
+  color: #444;
+  padding: 6px 4px;
+  border-radius: 999px;
+  border: 1px solid #ddd;
+}
+
+/* ========================
+   POPUP: LOKASI / HUBUNGI / RSVP
+   ======================== */
+
+.location-popup,
+.contact-popup,
+.rsvp-popup {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 60px; /* berhenti atas menu */
+  display: flex;
+  justify-content: center;
+  z-index: 99998; /* sedikit bawah menu */
+  pointer-events: none;
+}
+
+.location-card,
+.contact-card,
+.rsvp-card {
+  pointer-events: auto;
+  width: 100%;
+  max-width: 520px;
+  background: linear-gradient(180deg, #fffdfd 0%, #fff6fb 40%, #fff0f6 100%);
+  border-radius: 20px;
+  padding: 18px 22px 22px;
+  box-shadow: 0 18px 40px rgba(140,80,100,0.08);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  animation: slideUpPopup 0.28s ease-out;
+}
+
+/* Lokasi */
+.venue {
+  font-weight: 600;
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+.addr {
+  font-size: 0.9rem;
+  margin-bottom: 16px;
+  line-height: 1.4rem;
+}
+
+.location-btn-row {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.loc-btn {
+  flex: 1;
+  padding: 10px 0;
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #fff;
+  border: none;
+}
+
+.loc-btn.maps {
+  background: #4285f4;
+}
+
+.loc-btn.waze {
+  background: #56c7fa;
+  color: #000;
+}
+
+/* Make action buttons follow floral theme when appropriate */
+.loc-btn.maps, .loc-btn.waze {
+  border-radius: 999px;
+  box-shadow: 0 8px 20px rgba(140,80,100,0.06);
+  font-weight: 700;
+}
+
+/* Contact button (WhatsApp) keep green but with softer style */
+.contact-btn.whatsapp {
+  display: inline-block;
+  padding: 10px 22px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #25d366, #17b95a);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.92rem;
+  box-shadow: 0 10px 28px rgba(140,80,100,0.06);
+}
+
+/* Hubungi */
+.contact-name {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.contact-desc {
+  font-size: 0.9rem;
+  margin-bottom: 16px;
+  line-height: 1.4rem;
+}
+
+.contact-btn.whatsapp {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 18px;
+  border-radius: 12px;
+  background: linear-gradient(135deg,#25d366,#17b95a);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.95rem;
+  box-shadow: 0 10px 28px rgba(140,80,100,0.06);
+}
+
+/* Full-width variant to match RSVP send button */
+.contact-btn.full {
+  display: inline-flex;
+  width: 92%;
+  max-width: 520px;
+  padding: 12px 14px;
+  border-radius: 999px;
+  justify-content: center;
+  box-shadow: 0 12px 30px rgba(140,80,100,0.08);
+  margin: 0 auto;
+}
+
+.contact-entry { margin-bottom: 12px; text-align: center; }
+.contact-label { display:block; font-weight:700; margin-bottom:8px; color:#6a4444; text-align: center; }
+
+/* Alternate color variant for secondary contact */
+.contact-btn.alt {
+  background: linear-gradient(135deg,#ff9aa2,#ff6b81);
+  box-shadow: 0 10px 26px rgba(255,110,130,0.08);
+}
+
+/* Small variant: slightly reduced size than popup buttons */
+.contact-btn.small {
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  border-radius: 18px;
+  width: 72%;
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+/* Close button untuk semua popup */
+.close-btn {
+  margin-top: 8px;
+  padding: 7px 18px;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(180deg,#f8eef3,#f1dfe6);
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+/* RSVP card specifics */
+.rsvp-card label { display: block; text-align: left; margin-top: 8px; font-weight: 600; color: #6a4444; }
+.rsvp-card input[type="text"], .rsvp-card select {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(231,180,195,0.45);
+  margin-top: 6px;
+  box-sizing: border-box;
+}
+
+.presence-row { display:flex; gap:8px; margin-top:8px; }
+.presence { flex:1; padding:8px 6px; border-radius:999px; border:none; cursor:pointer; font-weight:700; }
+.presence.hadir { background: linear-gradient(135deg,#f7c8d3,#f4a6bf); color:#6a3b3f; box-shadow: 0 8px 20px rgba(140,80,100,0.06); }
+.presence.takhadir { background: #f0dfe6; color:#6a3b3f; }
+
+.send-btn {
+  margin-top: 12px;
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(135deg,#f4a6bf,#e89fb6);
+  color: #5b2e31;
+  font-weight: 700;
+  box-shadow: 0 12px 30px rgba(140,80,100,0.08);
+  cursor: pointer;
+}
+
+/* Decorative floral pseudo-element for popups */
+.location-card::after, .contact-card::after, .rsvp-card::after {
+  content: '';
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  right: -30px;
+  top: -30px;
+  background: radial-gradient(circle at 30% 30%, rgba(248, 199, 219, 0.45), transparent 40%),
+              radial-gradient(circle at 70% 70%, rgba(239, 167, 199, 0.25), transparent 50%);
+  filter: blur(8px);
+  pointer-events: none;
+  transform: rotate(14deg);
+  opacity: 0.9;
+}
+
+/* Animasi naik dari bawah */
+@keyframes slideUpPopup {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* ========================
+   BLUR OVERLAY (untuk gate & popup)
+   ======================== */
+
+.blur-overlay {
+  position: fixed;
+  inset: 0;
+  backdrop-filter: blur(8px);
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 5;
+}
+
+/* ========================
+   GATE & PINTU 3D
+   ======================== */
+
+.gate-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  overflow: hidden;
+  perspective: 1200px; /* untuk 3D rotateY */
+  /* soft floral-tinted backdrop */
+  background: radial-gradient(circle at 20% 10%, rgba(255,240,246,0.18), transparent 18%),
+              radial-gradient(circle at 80% 90%, rgba(255,244,238,0.12), transparent 20%);
+}
+
+/* Pintu asas */
+.door {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  /* pastel floral door panels (rectangular) */
+  background: linear-gradient(135deg, #fff2f7 0%, #fde9f2 40%, #fdeef5 100%);
+  box-shadow: inset 0 -30px 60px rgba(245, 200, 220, 0.12), 0 0 30px rgba(140, 80, 100, 0.08);
+  z-index: 1;
+  transform-style: preserve-3d;
+  transition: transform 0.8s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Pintu kiri – hinge kiri */
+ .door-left {
+  left: 0;
+  transform-origin: left center;
+  transform: rotateY(0deg);
+}
+
+/* Pintu kanan – hinge kanan */
+ .door-right {
+  right: 0;
+  transform-origin: right center;
+  transform: rotateY(0deg);
+}
+
+/* Bila pintu buka – macam tarik keluar */
+.door-left.open {
+  transform: rotateY(-95deg);
+}
+
+.door-right.open {
+  transform: rotateY(95deg);
+}
+
+/* Handle pintu */
+.door-left::after,
+.door-right::after {
+  content: '';
+  width: 12px;
+  height: 44px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #fffafc, #fde9f2);
+  box-shadow: 0 6px 14px rgba(140,80,100,0.12);
+}
+
+.door-left::after {
+  margin-left: auto;
+  margin-right: 24px;
+}
+
+.door-right::after {
+  margin-right: auto;
+  margin-left: 24px;
+}
+
+/* Kad gate di tengah */
+.gate-card {
+  position: relative;
+  z-index: 2; /* atas pintu */
+  background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,247,250,0.92));
+  /* make the invite card circular */
+  width: 320px;
+  height: 320px;
+  padding: 20px;
+  border-radius: 50%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 18px 48px rgba(140,80,100,0.08);
+  border: 1px solid rgba(231,180,195,0.6);
+  transition: opacity 0.45s ease-in-out 0.18s, transform 0.3s ease;
+  /* subtle breathing (heartbeat) animation */
+  animation: gate-breath 4s ease-in-out infinite;
+}
+
+.gate-card::before {
+  content: '';
+  position: absolute;
+  right: -40px;
+  bottom: -28px;
+  width: 180px;
+  height: 120px;
+  background: radial-gradient(circle at 30% 30%, rgba(248,199,219,0.5), transparent 40%),
+              radial-gradient(circle at 70% 70%, rgba(239,167,199,0.35), transparent 45%);
+  filter: blur(6px);
+  opacity: 0.9;
+  pointer-events: none;
+  border-radius: 20px;
+}
+
+/* animate the decorative floral accent with a very slow float */
+.gate-card::before {
+  animation: accent-float 6s ease-in-out infinite;
+}
+
+/* stronger, quicker pulse on hover to give feedback */
+.gate-card:hover {
+  animation: gate-breath-hover 0.9s ease-in-out 1;
+  transform: scale(1.03);
+}
+
+@keyframes gate-breath {
+  0% { transform: scale(1); box-shadow: 0 18px 48px rgba(140,80,100,0.06); }
+  40% { transform: scale(1.01); box-shadow: 0 20px 52px rgba(140,80,100,0.08); }
+  60% { transform: scale(0.995); box-shadow: 0 16px 40px rgba(140,80,100,0.05); }
+  100% { transform: scale(1); box-shadow: 0 18px 48px rgba(140,80,100,0.06); }
+}
+
+@keyframes gate-breath-hover {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.06); }
+  100% { transform: scale(1); }
+}
+
+@keyframes accent-float {
+  0% { transform: translateY(0) scale(1); opacity: 0.9; }
+  50% { transform: translateY(-8px) scale(1.02); opacity: 0.95; }
+  100% { transform: translateY(0) scale(1); opacity: 0.9; }
+}
+
+.gate-card.fade-out {
+  opacity: 0;
+}
+
+.gate-small-text {
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  opacity: 0.7;
+  margin-bottom: 6px;
+}
+
+.gate-title {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.gate-names {
+  font-size: 14px;
+  line-height: 1.4;
+  margin-bottom: 18px;
+}
+
+.gate-button {
+  background: linear-gradient(135deg, #f7c8d3 0%, #f4a6bf 50%, #e89fb6 100%);
+  color: #6a3b3f;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 999px;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 10px 28px rgba(140,80,100,0.08);
+}
+
+.gate-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 40px rgba(140,80,100,0.12);
+}
+
+/* ========================
+   INVITATION CARD – FLORAL SOFT PINK
+   ======================== */
+
+/* Section jemputan */
+.invite-section.floral-theme {
+  padding: 90px 16px 120px;
+  display: flex;
+  justify-content: center;
+}
+
+.invite-card {
+  max-width: 480px;
+  width: 100%;
+  /* 🌸 Gradient terus dalam kad – tak guna ::after lagi */
+  background: linear-gradient(
+    to bottom,
+    #fbe9f2 0%,
+    #fdf4f7 22%,
+    #fffdfd 45%,
+    #fffdfd 100%
+  );
+  border-radius: 26px;
+  padding: 26px 22px 30px;
+  box-shadow:
+    0 18px 40px rgba(0, 0, 0, 0.12),
+    0 0 0 1px rgba(255, 255, 255, 0.8);
+  position: relative;
+  overflow: hidden;
+}
+
+
+
+/* Floral tambahan bawah kanan */
+.invite-card-inner-floral {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  bottom: -60px;
+  right: -60px;
+  background:
+    radial-gradient(circle at 70% 60%, rgba(248, 199, 219, 0.75), transparent 60%),
+    radial-gradient(circle at 20% 80%, rgba(239, 167, 199, 0.5), transparent 65%);
+  opacity: 0.9;
+  filter: blur(0.8px);
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+/* Floral SVG ornament added inside invite-card */
+.floral-ornament {
+  position: absolute;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0.95;
+  transform-origin: center;
+}
+
+.ornament-top-left {
+  left: -26px;
+  top: -26px;
+  width: 120px;
+  height: 120px;
+}
+
+.floral-ornament svg { display: block; width: 100%; height: 100%; }
+
+/* Gate floral accent */
+.gate-floral {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  width: 84px;
+  height: 84px;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.95;
+  transform-origin: center;
+  filter: drop-shadow(0 6px 10px rgba(140,80,100,0.06));
+}
+
+/* gentle float & rotate for ornaments */
+.floral-ornament, .gate-floral {
+  animation: ornament-float 6s ease-in-out infinite;
+}
+
+@keyframes ornament-float {
+  0% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-6px) rotate(2deg); }
+  100% { transform: translateY(0) rotate(0deg); }
+}
+
+/* Responsive adjust glow untuk skrin besar */
+@media (min-width: 768px) {
+  .invite-card::after {
+    width: 140px;
+    height: 140px;
+    top: -30px;
+    left: -30px;
+    filter: blur(0.5px);
+  }
+
+  .invite-card-inner-floral {
+    width: 160px;
+    height: 160px;
+    bottom: -40px;
+    right: -40px;
+    filter: blur(0.5px);
+  }
+}
+
+/* Badge kecil atas (optional, kalau guna) */
+.invite-header-badge {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 6px;
+}
+
+.invite-header-badge span {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.8px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(244, 205, 221, 0.75);
+  color: #8c5b61;
+}
+
+/* Typography kad jemputan */
+
+.basmalah {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  font-size: 18px;
+  margin: 10px 0 8px;
+  color: #5b3b36;
+  font-family: 'Playfair Display', 'Poppins', serif;
+}
+
+.invite-tagline {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: #b48982;
+  margin-bottom: 10px;
+}
+
+.parents {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #6a4a43;
+  margin-bottom: 12px;
+}
+
+.invite-line,
+.vip-line {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  font-size: 12.5px;
+  color: #7a5b53;
+  margin-bottom: 6px;
+}
+
+.vip-line {
+  font-size: 12px;
+}
+
+/* Nama pengantin */
+.pengantin {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  margin: 18px 0 14px;
+}
+
+.pengantin-name {
+  display: inline-block;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  color: #5b3b36;
+  font-family: 'Playfair Display', 'Poppins', serif;
+}
+
+.pengantin .and {
+  display: inline-block;
+  font-size: 18px;
+  color: #c58c88;
+  margin: 4px 0;
+}
+
+/* Divider floral ala kad orang */
+.divider-floral {
+  position: relative;
+  z-index: 1;
+  width: 90px;
+  height: 1px;
+  margin: 8px auto 18px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    #e3b5c8,
+    #f5d7e4,
+    #e3b5c8,
+    transparent
+  );
+}
+
+.divider-floral::before,
+.divider-floral::after {
+  content: '✿';
+  position: absolute;
+  top: -9px;
+  font-size: 12px;
+  color: #d99ab3;
+}
+
+.divider-floral::before {
+  left: -4px;
+}
+
+.divider-floral::after {
+  right: -4px;
+}
+
+/* Grid info */
+.info-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+@media (min-width: 480px) {
+  .info-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .info-block.full {
+    grid-column: 1 / -1;
+    text-align: center; /* center content for wider screens */
+  }
+}
+
+.info-block {
+  background: #fff7fb;
+  border-radius: 16px;
+  padding: 10px 12px;
+  border: 1px solid rgba(229, 186, 204, 0.6);
+  text-align: left;
+}
+
+/* Center ATUR CARA MAJLIS block on small screens too */
+.info-block.full {
+  text-align: center;
+}
+
+.info-block h3 {
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #b76b82;
+  margin-bottom: 4px;
+}
+
+.info-main {
+  font-size: 13px;
+  font-weight: 600;
+  color: #5a3a36;
+}
+
+.info-sub {
+  font-size: 12px;
+  color: #7f5b55;
+}
+
+/* Doa section */
+.doa-section {
+  padding: 0 16px 120px;
+  display: flex;
+  justify-content: center;
+}
+
+.doa-card {
+  max-width: 480px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  padding: 18px 18px 20px;
+  margin-top: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+
+.doa-title {
+  font-size: 13px;
+  text-align: center;
+  color: #7a5652;
+  margin-bottom: 6px;
+}
+
+.doa-text {
+  font-size: 12px;
+  line-height: 1.6;
+  text-align: center;
+  color: #5c3f3a;
+}
+.bottom-menu {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 12px 14px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(253,236,244,0.85));
+  backdrop-filter: blur(6px);
+  box-shadow: 0 -8px 24px rgba(179, 122, 140, 0.08);
+  z-index: 9999;
+}
+
+.menu-icon {
+  width: 84px;
+  height: 84px;
+  background: linear-gradient(135deg, #fff6fb 0%, #fde9f2 60%);
+  border-radius: 22px;
+  border: 1px solid rgba(227, 181, 204, 0.9);
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  text-decoration: none;
+  color: #8c5b61;
+  box-shadow: 0 10px 28px rgba(140, 80, 100, 0.08);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+
+.menu-icon:active {
+  transform: scale(0.96);
+  background: linear-gradient(135deg, #fbeef5 0%, #f9dfe8 60%);
+}
+
+.menu-icon:hover,
+.menu-icon:focus {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(140, 80, 100, 0.12);
+  background: linear-gradient(135deg, #fff2f7 0%, #fde9f2 70%);
+  outline: none;
+}
+
+.menu-svg {
+  width: 28px;
+  height: 28px;
+  fill: currentColor;
+}
+
+.menu-label {
+  display: block;
+  margin-top: 6px;
+  font-size: 12px;
+  color: #8c5b61;
+  font-weight: 600;
+  line-height: 1;
+}
+
+/* Make the menu visually match the invite card on small screens */
+@media (max-width: 480px) {
+  .bottom-menu { padding: 10px; gap: 8px; }
+  .menu-icon { width: 50px; height: 50px; }
+}
