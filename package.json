@@ -6,7 +6,9 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "deploy-gh": "ng build --output-path docs --base-href /wedding-invitation/"
+
   },
   "private": true,
   "dependencies": {
