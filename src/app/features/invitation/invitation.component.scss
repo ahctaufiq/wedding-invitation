@@ -572,6 +572,30 @@ body {
     left: -30px;
     filter: blur(0.5px);
   }
+  // phone card
+  .gate-card{
+  padding: 220px;
+  }
+  //phone text 
+  .gate-small-text {
+  font-size: 30px;
+  z-index: 3;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  opacity: 0.8;
+  margin-bottom: 6px;
+  }
+  // naming nur adlina dan taufiq
+  .gate-names {
+  font-size: 31px;
+  line-height: 1.4;
+  margin-bottom: 18px;
+  }
+  //phone button
+  .gate-title {
+  font-size: 30px;
+  margin-bottom: 10px;
+  }
 
   .invite-card-inner-floral {
     width: 160px;
@@ -715,16 +739,16 @@ body {
   gap: 10px;
 }
 
-@media (min-width: 480px) {
-  .info-grid {
-    grid-template-columns: 1fr 1fr;
-  }
+// @media (min-width: 480px) {
+//   .info-grid {
+//     grid-template-columns: 1fr 1fr;
+//   }
 
-  .info-block.full {
-    grid-column: 1 / -1;
-    text-align: center; /* center content for wider screens */
-  }
-}
+//   .info-block.full {
+//     grid-column: 1 / -1;
+//     text-align: center; /* center content for wider screens */
+//   }
+// }
 
 .info-block {
   background: #fff7fb;
@@ -848,8 +872,4 @@ body {
   line-height: 1;
 }
 
-/* Make the menu visually match the invite card on small screens */
-@media (max-width: 480px) {
-  .bottom-menu { padding: 10px; gap: 8px; }
-  .menu-icon { width: 50px; height: 50px; }
-}
+
